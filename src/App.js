@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import usePosts from './posts/hook/usePost/usePosts';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import PostsList from './posts/pages/PostsList';
+import CreatePost from './posts/pages/CreatePost';
 
 function App() {
+  const {page, setPage, totalPages, posts} = usePosts();
+
+  const handlePageChange = (event, newPage) => {
+    setPage(newPage);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/post' element={<PostsList />}/>
+        <Route path='/post/new' element={<CreatePost />}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
